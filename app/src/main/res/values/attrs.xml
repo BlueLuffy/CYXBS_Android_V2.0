@@ -12,4 +12,47 @@
         <attr name="shadow_right" format="reference" />
         <attr name="shadow_bottom" format="reference" />
     </declare-styleable>
+
+    <attr name="SwipeBackLayoutStyle" format="reference" />
+
+    <declare-styleable name="BaseTheme">
+        <attr name="actionBarIconColor" format="color" />
+        <attr name="actionBarInsetStart" format="dimension" />
+        <attr name="spinnerBarInsetStart" format="dimension" />
+        <attr name="popupItemBackground" format="reference" />
+        <attr name="photoItemForeground" format="reference" />
+        <attr name="photoItemForegroundBorderless" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ScrimInsetsView">
+        <attr name="insetForeground" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="pstIndicatorColor" format="color" />
+        <attr name="pstUnderlineColor" format="color" />
+        <attr name="pstDividerColor" format="color" />
+        <attr name="pstDividerWidth" format="dimension" />
+        <attr name="pstIndicatorHeight" format="dimension" />
+        <attr name="pstUnderlineHeight" format="dimension" />
+        <attr name="pstDividerPadding" format="dimension" />
+        <attr name="pstTabPaddingLeftRight" format="dimension" />
+        <attr name="pstScrollOffset" format="dimension" />
+        <attr name="pstTabBackground" format="reference" />
+        <attr name="pstShouldExpand" format="boolean" />
+        <attr name="pstTextAllCaps" format="boolean" />
+        <attr name="pstPaddingMiddle" format="boolean" />
+        <attr name="pstTextColorSelected" format="color" />
+        <attr name="pstTextAlpha" format="integer" />
+        <attr name="pstTextStyle">
+            <flag name="normal" value="0x0" />
+            <flag name="bold" value="0x1" />
+            <flag name="italic" value="0x2" />
+        </attr>
+        <attr name="pstTextSelectedStyle">
+            <flag name="normal" value="0x0" />
+            <flag name="bold" value="0x1" />
+            <flag name="italic" value="0x2" />
+        </attr>
+    </declare-styleable>
 </resources>

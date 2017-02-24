@@ -1,27 +1,30 @@
 package com.mredrock.cyxbs.presenter.activity;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 
+import com.mredrock.cyxbs.CyxbsApplication;
+import com.mredrock.cyxbs.di.component.ApplicationComponent;
+import com.mredrock.cyxbs.di.modules.ActivityModule;
+import com.mredrock.cyxbs.presenter.IPresenter;
 import com.mredrock.cyxbs.presenter.activity.swipebacklayout.app.SwipeBackActivity;
-import com.mredrock.cyxbs.view.Vu;
+import com.mredrock.cyxbs.view.impl.AbsActivityVu;
 
 import de.greenrobot.event.EventBus;
 
 /**
  * @param <V>
  */
-public abstract class BasePresenterActivity<V extends Vu> extends SwipeBackActivity {
+public abstract class BasePresenterActivity<V extends AbsActivityVu> extends SwipeBackActivity implements IPresenter<V> {
 
-    protected V vu;
+    protected V               vu;
+    protected EventBus        bus;
     protected FragmentManager fm;
-    protected EventBus bus;
-
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fm = getFragmentManager();
+        fm = getSupportFragmentManager();
         bus = EventBus.getDefault();
         try {
             vu = getVuClass().newInstance();
@@ -34,6 +37,7 @@ public abstract class BasePresenterActivity<V extends Vu> extends SwipeBackActiv
             e.printStackTrace();
         }
         setSwipeBackEnable(shouldSwipeBack());
+        getApplicationComponent().inject(this);
     }
 
     @Override
@@ -72,14 +76,29 @@ public abstract class BasePresenterActivity<V extends Vu> extends SwipeBackActiv
         return false;
     }
 
-    protected abstract Class<V> getVuClass();
-
     protected abstract boolean shouldSwipeBack();
 
-    protected void onBindVu() {
+    @Override
+    public void onDestroyVu() {
+
     }
 
-    protected void onDestroyVu() {
+    /**
+     * Get the Main Application component for dependency injection.
+     *
+     * @return {@link com.mredrock.cyxbs.di.component.ApplicationComponent}
+     */
+    protected ApplicationComponent getApplicationComponent() {
+        return ((CyxbsApplication) getApplication()).getApplicationComponent();
+    }
+
+    /**
+     * Get an Activity module for dependency injection.
+     *
+     * @return {@link com.mredrock.cyxbs.di.modules.ActivityModule}
+     */
+    protected ActivityModule getActivityModule() {
+        return new ActivityModule(this);
     }
 
 }
